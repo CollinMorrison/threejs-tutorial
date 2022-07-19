@@ -1,3 +1,6 @@
+//tutorial url: https://www.freecodecamp.org/news/three-js-tutorial/
+
+
 import * as THREE from "three"
 const scene = new THREE.Scene()
 
