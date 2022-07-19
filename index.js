@@ -1,4 +1,5 @@
 //tutorial url: https://www.freecodecamp.org/news/three-js-tutorial/
+//repo url: https://github.com/dubnuzz/threejs-tutorial
 
 
 import * as THREE from "three"
