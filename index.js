@@ -6,8 +6,12 @@
 import * as THREE from "three"
 const scene = new THREE.Scene()
 
+document.write("Hello World!")
+
+
+
 //Setting up the ambient light, shines from every direction
-const ampbientLight = new THREE.AmbientLight(0xffffff, 0.6)
+const ambientLight = new THREE.AmbientLight(0xffffff, 0.6)
 scene.add(ambientLight)
 
 //Setting up the directional light
@@ -47,4 +51,57 @@ function createWheels() {
     const material = new THREE.MeshlambertMaterial({ color: 0x333333 })
     const wheel = new THREE.Mesh(geometry, material)
     return wheel
+}
+
+function createCar() {
+    const car = new THREE.Group()
+
+    const backWheel = createWheels()
+    backWheel.position.y = 6
+    backWheel.position.x = -18
+    car.add(backwheel)
+
+    const frontWheel = createWheels()
+    frontWheel.position.y = 6
+    frontWheel.position.x = 18
+    car.add(frontWheel)
+
+    const main = new THREE.Mesh(
+        new THREE.BoxBufferGeometry(60, 15, 30),
+        new THREE.MeshLambertMaterial({ color: 0x78b14b })
+    )
+
+    main.position.y = 12
+    car.add(main)
+
+    const cabin = new THREE.Mesh(
+        new THREE.BoxBufferGeometry(33, 12, 24),
+        new THREE.MeshLambertMaterial({ color: 0xffffff })
+    )
+
+    cabin.position.x = -6
+    cabin.position.y = 25.5
+    car.add(cabin)
+
+    return car
+}
+
+const car = createCar()
+scene.add(car)
+renderer.render(scene, camera)
+
+
+function getCarFrontTexture() {
+    const canvas = document.createElement("canvas")
+    canvas.width = 64
+    canvas.height = 32
+    const context = canvas.getContext("2d")
+
+    context.fillStyle = "#ffffff"
+    context.fillRect(0, 0, 64, 32)
+
+    context.fillStyle = "#666666"
+    context.fillRect(8, 8, 48, 24)
+
+    return new THREE.CanvasTexture(canvas)
 }
